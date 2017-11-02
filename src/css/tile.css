@@ -1,0 +1,45 @@
+.tile {
+  width: 35px;
+  height: 35px;
+  padding: 0px;
+  margin: 0px;
+  font-size:0px;
+  border:0px;
+  position: relative;
+  display: inline-block;
+  border: none;
+  background-color:yellow;
+}
+
+#X {
+  background-color: black;
+}
+
+#_ {
+  background-color:lightgrey; 
+}
+
+#P {
+  background-color:green;
+}
+
+#W  {
+  background-color:yellow;
+}
+
+#E {
+  background-color:red;
+}
+
+#B {
+  background-color:purple;
+}
+
+#D {
+  background-color: blue;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
+}

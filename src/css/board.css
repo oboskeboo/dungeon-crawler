@@ -1,0 +1,31 @@
+.board {
+  border:solid;
+  width: 700px;
+  height: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  text-align:center;
+}
+
+.playerStatus {
+  line-height: 100%;
+  font-size: 30px;
+  padding: 0px;
+  color:white;
+  background-color: black;
+}
+
+.ra-hearts {
+  color: red;
+}
+
+.actions{
+  color:red;
+  font-size: 18px;
+  height:100px;
+}
+
+.action{
+  margin: 0px;
+}
