@@ -3,17 +3,17 @@ import shortId from 'shortid'
 import "../css/board.css"
 import "../css/rpg-awesome.min.css"
 import ResolveMove from "../action/resolveMove"
-import TranslateBoard from "../action/translateBoard"
+import ResolveBoard from "../action/resolveBoard"
 import VisibleRange from "../action/visibleRange"
 import Tile from "./tile"
-import AddItems from "../action/addItems"
-import GetBoard from "../action/boards"
+
 
 
 const initialState={
-  board:"0",
-    visible:[],
-    visibleToggle:true,
+  board:"",
+  level:0,
+  visible:[],
+  visibleToggle:false,
   player:{
     level:1,
     xp:0,
@@ -30,8 +30,9 @@ const initialState={
     defence:0,
     position:{x:0,y:0},
     vision:3,
-    action:"",
-    counterAction:""
+    action:"The evil overlord kilgaroth has taken hold off the small village folkstad",
+    counterAction:"The people off folkstad reaches out to you to save them from his evil grasp",
+    bosskill:false
   }
   
 }
@@ -46,27 +47,27 @@ export default class Board extends Component {
   componentDidMount(){
     window.addEventListener('keydown', this.handleKeyPress);
     const state = Object.assign({},initialState)
-    const board = GetBoard(state.board,false)    
-    state.board =  board.board
-    state.position =  Object.assign({},board.player) 
-    state.board[board.player.y][board.player.x] = "P"
-    state.board = AddItems(state,board)
-    state.board = TranslateBoard(state.board)  //TRANSLATE AFTER ALL ITEMS ARE ADDED
-    state.visible = VisibleRange(state.player.position,state.player.vision,state.board)
 
     this.setState(
-      state
+      ResolveBoard(state,state.level)
     )
   }  
 
   handleKeyPress(e){
       const state = ResolveMove(e.keyCode,this.state)
-      if(state.player.health > 0){
-      if(state.visible.length === 0 && state.visibleToggle === true)
-        state.visible = VisibleRange(state.player.position,state.player.vision,state.board)
+      
+      if(state.bosskill === true){
+        state.player.action = "You killed the evil overlord kilgaroth"
+        state.player.counterAction = "the people of folkstad is free once again"
+        window.removeEventListener('keydown',this.handleKeyPress)
       }
+      else if(state.player.health > 0){
+        if(state.visible.length === 0 && state.visibleToggle === true)
+          state.visible = VisibleRange(state.player.position,state.player.vision,state.board)
+        }
       else{
-        state.player.action = "YOU DEAD !"
+        state.player.action = "YOU DIED!"
+        state.player.action = "The evil overloard kilgaroths terror over folkstad continues"
         window.removeEventListener('keydown',this.handleKeyPress)
       }
       this.setState(state)

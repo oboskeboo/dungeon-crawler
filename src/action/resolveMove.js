@@ -1,6 +1,7 @@
 import {PickUp} from "../action/pickUp"
 import Fight from "../action/fight"
 import {Move,Direction} from "../action/move"
+import ResolveBoard from "../action/resolveBoard"
 
 export default function resolveMove (key,state) {
   
@@ -42,9 +43,9 @@ export default function resolveMove (key,state) {
 
   else if  ( ["D"].includes(tileType)) //check for enemy and resolve fight
   {
-    newState.player.action = "This Door is locked"
-    newState.player.counterAction = "Buy DLC to open ! "
-    return newState
+    newState.player.action = "You found the door, opening reveals a stairwell"
+    newState.player.counterAction = "you moved down a level "
+    return ResolveBoard(newState,newState.level+1)
   }
  
   return  Move(newState,newPos) //check if move is allowed 

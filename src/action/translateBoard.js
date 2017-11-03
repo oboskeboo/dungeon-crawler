@@ -18,8 +18,7 @@ const boss = (id,type) =>{
     id:id,
     type:type,
     health : 24,
-    attack : 16,
-    level: 1
+    attack : 24,
   }
 }
 
@@ -28,8 +27,7 @@ const boss = (id,type) =>{
     id:id,
     type:type,
     health : 12,
-    attack : 8,
-    level: 1
+    attack : 10,
   }
 }
 
